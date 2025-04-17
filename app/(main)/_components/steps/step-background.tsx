@@ -18,29 +18,35 @@ export function StepBackgroundVideo({ settings, onSettingsChange }: StepBackgrou
 
   const backgroundOptions = [
     {
-      value: "urban",
+      value: "1",
       label: "Minecraft",
       description: "Block-based world with pixel art style",
       preview: "https://qbhnvyynbrkwonkfxkwn.supabase.co/storage/v1/object/public/fypcontent//Stardust.mp4",
     },
     {
-      value: "concert",
-      label: "Stardust",
+      value: "2",
+      label: "",
       description: "Cosmic theme with sparkling particle effects",
       preview: "https://qbhnvyynbrkwonkfxkwn.supabase.co/storage/v1/object/public/fypcontent//Stardust.mp4",
     },
     {
-      value: "abstract",
-      label: "Nature",
+      value: "3",
+      label: "",
       description: "Natural scenery with flowing water and trees",
       preview: "https://qbhnvyynbrkwonkfxkwn.supabase.co/storage/v1/object/public/fypcontent//backgroundVideo69.mp4", 
     },
     {
-      value: "industrial",
-      label: "Minimalist",
+      value: "4",
+      label: "",
       description: "Clean and simple design with neutral tones",
       preview: "https://qbhnvyynbrkwonkfxkwn.supabase.co/storage/v1/object/public/fypcontent//bro.mp4",
-    }
+    },
+    {
+      value: "0",
+      label: "No Video",
+      description: "Generate video without background Video",
+      preview: "https://qbhnvyynbrkwonkfxkwn.supabase.co/storage/v1/object/public/fypcontent//backgroundVideo69.mp4",
+    },
   ];
 
   useEffect(() => {

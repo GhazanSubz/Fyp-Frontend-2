@@ -38,29 +38,29 @@ export function StepVoice({ settings, onSettingsChange }: StepVoiceProps) {
       id: "en_speaker_4",
       name: "William",
       description: "Mature male voice, perfect for documentary-style videos",
-      tags: ["Male", "Middle aged", "English"],
+      tags: ["Male", "Mature", "English"],
       sample: "https://dl.suno-models.io/bark/prompts/continuation_audio/en_speaker_4.mp3",
     },
     {
-      id: "en_speaker_0",
+      id: "en_speaker_6",
       name: "Adam",
       description: "Energetic male voice, popular for TikTok and short videos",
       tags: ["Male", "Middle aged", "English"],
-      sample: "https://dl.suno-models.io/bark/prompts/continuation_audio/en_speaker_4.mp3",
+      sample: "https://dl.suno-models.io/bark/prompts/continuation_audio/en_speaker_6.mp3",
     },
     {
       id: "en_speaker_9",
       name: "Natasha",
       description: "Soft female voice, great for informative and calming content",
-      tags: ["Female", "Young", "English"],
-      sample: "https://dl.suno-models.io/bark/prompts/continuation_audio/en_speaker_4.mp3",
+      tags: ["Female", "Middle aged", "English"],
+      sample: "https://dl.suno-models.io/bark/prompts/continuation_audio/en_speaker_9.mp3",
     },
     {
-      id: "zh_speaker_0",
-      name: "Nicole",
+      id: "zh_speaker_8",
+      name: "Jake",
       description: "Gentle whisper voice, ideal for ASMR and relaxation videos",
-      tags: ["Female", "Young", "English"],
-      sample: "https://dl.suno-models.io/bark/prompts/continuation_audio/en_speaker_4.mp3",
+      tags: ["Male", "Young", "English"],
+      sample: "https://dl.suno-models.io/bark/prompts/continuation_audio/en_speaker_8.mp3",
     },
   ];
 
@@ -106,20 +106,6 @@ export function StepVoice({ settings, onSettingsChange }: StepVoiceProps) {
       }
     } catch (error) {
       console.error("Audio playback error:", error);
-    }
-  };
-
-  const handleVoiceVolumeChange = (value: number[]) => {
-    setVoiceVolume(value[0]);
-    if (audioRef.current && playingVoice) {
-      audioRef.current.volume = value[0] / 100;
-    }
-  };
-
-  const handleVoiceSpeedChange = (value: number[]) => {
-    setVoiceSpeed(value[0]);
-    if (audioRef.current && playingVoice) {
-      audioRef.current.playbackRate = value[0] / 100;
     }
   };
 
@@ -207,59 +193,7 @@ export function StepVoice({ settings, onSettingsChange }: StepVoiceProps) {
           ))}
         </div>
         
-        <div className="mt-6 p-5 rounded-lg border border-zinc-700 bg-zinc-900/50">
-          <h3 className="text-lg font-medium text-white mb-4">Advanced Voice Settings</h3>
-          
-          <div className="space-y-4">
-            <div className="space-y-2">
-              <div className="flex justify-between">
-                <label className="text-sm text-zinc-300">Voice Volume</label>
-                <span className="text-sm text-pink-400">{voiceVolume}%</span>
-              </div>
-              <div className="flex items-center">
-                <Volume2 className="w-4 h-4 text-zinc-500 mr-2" />
-                <Slider
-                  value={[voiceVolume]}
-                  min={0}
-                  max={100}
-                  step={5}
-                  onValueChange={handleVoiceVolumeChange}
-                  className="flex-1"
-                />
-              </div>
-            </div>
-            
-            <div className="space-y-2">
-              <div className="flex justify-between">
-                <label className="text-sm text-zinc-300">Voice Speed</label>
-                <span className="text-sm text-pink-400">{voiceSpeed}%</span>
-              </div>
-              <div className="flex items-center">
-                <Mic className="w-4 h-4 text-zinc-500 mr-2" />
-                <Slider
-                  value={[voiceSpeed]}
-                  min={50}
-                  max={150}
-                  step={5}
-                  onValueChange={handleVoiceSpeedChange}
-                  className="flex-1"
-                />
-              </div>
-            </div>
-          </div>
-          
-          <Button 
-            variant="outline" 
-            size="sm"
-            onClick={() => {
-              setVoiceVolume(80);
-              setVoiceSpeed(100);
-            }}
-            className="mt-4 w-full border-zinc-700 text-zinc-300 hover:bg-zinc-800"
-          >
-            Reset To Default
-          </Button>
-        </div>
+        
       </div>
     </div>
   );

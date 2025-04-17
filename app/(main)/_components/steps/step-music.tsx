@@ -31,25 +31,25 @@ export function StepMusic({ settings, onSettingsChange }: StepMusicProps) {
   
   const musicOptions = [
     {
-      value: "Rock",
+      value: "1",
       label: "Rock",
       description: "Fast-paced, aggressive guitar riffs and drums",
-      sample: "https://dl.suno-models.io/bark/prompts/continuation_audio/en_speaker_4.mp3", 
+      sample: "https://dl.suno-models.io/bark/prompts/continuation_audio/en_speaker_4.mp3", //ADD SUPASBASE URL HERE
     },
     {
-      value: "Classic",
+      value: "2",
       label: "Classic",
       description: "Retro electronic music with 80s vibes",
       sample: "https://dl.suno-models.io/bark/prompts/continuation_audio/en_speaker_4.mp3", 
     },
     {
-      value: "Hip Hop",
+      value: "3",
       label: "Hip Hop",
       description: "Harsh, mechanical sounds with distorted beats",
       sample: "https://dl.suno-models.io/bark/prompts/continuation_audio/en_speaker_4.mp3", 
     },
     {
-      value: "none",
+      value: "0",
       label: "No Music",
       description: "Generate video without background music",
       sample: "",
