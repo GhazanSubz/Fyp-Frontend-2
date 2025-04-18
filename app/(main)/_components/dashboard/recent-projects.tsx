@@ -171,14 +171,11 @@ export function RecentProjects({ className = "" }: RecentProjectsProps) {
                  muted
                  playsInline
                  preload="metadata"
-                 autoPlay={false}
+                 autoPlay
                  controls
                  onLoadedMetadata={() => console.log('✅ Video loaded')}
                  onError={(e) => console.error('❌ Error loading video', e)}
                  />
-                <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-                <Play className="w-8 h-8 text-white opacity-70" />
-                </div>
                 </div>
                 
                 {/* Video Info */}
