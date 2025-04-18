@@ -159,7 +159,82 @@ export function RecentProjects({ className = "" }: RecentProjectsProps) {
         </div>
       ) : (
         <div className="divide-y divide-zinc-800">
-         
+          {videos.map((video) => (
+            <div key={video.id} className="p-4 hover:bg-zinc-800/30 transition-colors">
+              <div className="flex gap-4">
+                {/* Video Thumbnail */}
+                <div className="relative w-64 h-36 rounded overflow-hidden bg-zinc-900 flex-shrink-0 border border-blue-500">
+                <video
+                 src={video.url}
+                 className="w-full h-full object-cover border border-red-500"
+                 poster="/video-placeholder.jpg"
+                 muted
+                 playsInline
+                 preload="metadata"
+                 autoPlay={false}
+                 controls
+                 onLoadedMetadata={() => console.log('✅ Video loaded')}
+                 onError={(e) => console.error('❌ Error loading video', e)}
+                 />
+                <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+                <Play className="w-8 h-8 text-white opacity-70" />
+                </div>
+                </div>
+                
+                {/* Video Info */}
+                <div className="flex-grow">
+                  <Link href={`/videos/${video.id}`}>
+                    <h3 className="font-medium truncate hover:text-blue-400 transition-colors">
+                      {video.prompt.substring(0, 50)}{video.prompt.length > 50 ? '...' : ''}
+                    </h3>
+                  </Link>
+                  <div className="flex items-center text-xs text-zinc-400 mt-1">
+                    <span>{video.genre}</span>
+                    <span className="mx-2">•</span>
+                    <span>{formatDate(video.created_at)}</span>
+                  </div>
+                </div>
+                
+                {/* Actions */}
+                <div className="flex items-center gap-2">
+                  <Link 
+                    href={`/videos/${video.id}`}
+                    className="p-1.5 rounded-full hover:bg-zinc-700 transition-colors"
+                    title="View video"
+                  >
+                    <Play className="w-4 h-4" />
+                  </Link>
+                  
+                  <button
+                    onClick={() => handleDownload(video.url, video.prompt)}
+                    className="p-1.5 rounded-full hover:bg-zinc-700 transition-colors"
+                    title="Download video"
+                  >
+                    <Download className="w-4 h-4" />
+                  </button>
+                  
+                  <button
+                    onClick={() => handleDelete(video.id, video.filename)}
+                    className="p-1.5 rounded-full hover:bg-red-900/40 text-red-400 transition-colors"
+                    title="Delete video"
+                  >
+                    <Trash2 className="w-4 h-4" />
+                  </button>
+                </div>
+              </div>
+            </div>
+          ))}
+          
+          {videos.length >= 5 && (
+            <div className="p-4 text-center">
+              <Link 
+                href="/dashboard" 
+                className="text-blue-400 hover:text-blue-300 transition-colors text-sm"
+              >
+                View all videos →
+              </Link>
+            </div>
+          )}
         </div>
       )}
     </motion.div>
