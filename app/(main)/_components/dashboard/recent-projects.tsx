@@ -171,7 +171,7 @@ export function RecentProjects({ className = "" }: RecentProjectsProps) {
                  muted
                  playsInline
                  preload="metadata"
-                 autoPlay={false}
+                 autoPlay
                  controls
                  onLoadedMetadata={() => console.log('✅ Video loaded')}
                  onError={(e) => console.error('❌ Error loading video', e)}

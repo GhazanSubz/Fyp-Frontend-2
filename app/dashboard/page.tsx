@@ -20,10 +20,6 @@ export default function DashboardPage() {
             >
               <CreateNewButton />
             </DashboardHeader>
-
-            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
-              <StatsCards />
-            </div>
             <div className="mt-10">
               <RecentProjects />
             </div>

@@ -19,9 +19,9 @@ export function StepBackgroundVideo({ settings, onSettingsChange }: StepBackgrou
   const backgroundOptions = [
     {
       value: "1",
-      label: "Minecraft",
+      label: "",
       description: "Block-based world with pixel art style",
-      preview: "https://qbhnvyynbrkwonkfxkwn.supabase.co/storage/v1/object/public/fypcontent//Stardust.mp4",
+      preview: "https://qbhnvyynbrkwonkfxkwn.supabase.co/storage/v1/object/public/fypcontent//SubwaySurfer.mp4",
     },
     {
       value: "2",

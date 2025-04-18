@@ -3,7 +3,7 @@ import { useState } from "react"
 import Link from "next/link"
 import { usePathname, useRouter } from "next/navigation"
 import { useUser, useClerk, ClerkProvider } from "@clerk/nextjs"
-import { Home, Video, ImageIcon, FileText, Settings, LogOut, Menu, X } from "lucide-react"
+import { Home, Video, ImageIcon, FileText, Settings, LogOut, Menu, X, LayoutDashboard } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 
@@ -17,9 +17,14 @@ export function AppSidebar() {
 
   const menuItems = [
     {
+        name:"Home",
+        href:"/",
+        icon: Home,
+    },
+    {
       name: "Dashboard",
       href: "/dashboard",
-      icon: Home,
+      icon: LayoutDashboard,
     },
     {
       name: "Playground",
