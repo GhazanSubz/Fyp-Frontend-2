@@ -177,13 +177,12 @@ export function RecentProjects({ className = "" }: RecentProjectsProps) {
                  onError={(e) => console.error('❌ Error loading video', e)}
                  />
                 <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-                <Play className="w-8 h-8 text-white opacity-70" />
                 </div>
                 </div>
                 
                 {/* Video Info */}
                 <div className="flex-grow">
-                  <Link href={`/videos/${video.id}`}>
+                  <Link href={video.url}>
                     <h3 className="font-medium truncate hover:text-blue-400 transition-colors">
                       {video.prompt.substring(0, 50)}{video.prompt.length > 50 ? '...' : ''}
                     </h3>
