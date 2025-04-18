@@ -180,7 +180,7 @@ export function RecentProjects({ className = "" }: RecentProjectsProps) {
                 
                 {/* Video Info */}
                 <div className="flex-grow">
-                  <Link href={`/videos/${video.id}`}>
+                  <Link href={video.url}>
                     <h3 className="font-medium truncate hover:text-blue-400 transition-colors">
                       {video.prompt.substring(0, 50)}{video.prompt.length > 50 ? '...' : ''}
                     </h3>
@@ -195,7 +195,7 @@ export function RecentProjects({ className = "" }: RecentProjectsProps) {
                 {/* Actions */}
                 <div className="flex items-center gap-2">
                   <Link 
-                    href={`/videos/${video.id}`}
+                    href={video.url}
                     className="p-1.5 rounded-full hover:bg-zinc-700 transition-colors"
                     title="View video"
                   >

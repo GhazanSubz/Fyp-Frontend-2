@@ -180,8 +180,10 @@ export default function LandingPage() {
 
         {/* Right Side - Auth & Actions */}
         <div className="ml-auto flex gap-4 sm:gap-6">
-          <Link href="/dashboard" className="text-sm font-medium text-zinc-400 hover:text-white transition-colors">
-            Dashboard
+         <Link href="/playground">
+            <Button variant="outline" size="sm" className="border-pink-600 text-pink-500 hover:bg-pink-600/10">
+              Dashboard
+            </Button>
           </Link>
           <Link href="/playground">
             <Button variant="outline" size="sm" className="border-pink-600 text-pink-500 hover:bg-pink-600/10">
@@ -249,6 +251,14 @@ export default function LandingPage() {
                 </Button>
               </Link>
             </motion.div>
+            <motion.p
+  className="mt-10 text-3xl md:text-4xl font-extrabold text-center bg-gradient-to-r from-cyan-400 via-purple-400 to-pink-500 bg-clip-text text-transparent drop-shadow-[0_2px_15px_rgba(236,72,153,0.5)]"
+  initial={{ opacity: 0, y: 20 }}
+  animate={{ opacity: 1, y: 0 }}
+  transition={{ duration: 0.6, delay: 0.75 }}
+>
+  Here is a Glimpse
+</motion.p>
           </motion.div>
 
           <motion.div
@@ -256,15 +266,17 @@ export default function LandingPage() {
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.8 }}
-          >
+          >  
             <div className="aspect-video rounded-xl overflow-hidden border border-zinc-800 shadow-2xl shadow-pink-500/10">
-              <Image
-                src="/Punk1.jpg"
-                alt="AI Video Generator Demo"
-                width={1280}
-                height={720}
-                className="w-full h-full object-cover"
-              />
+            <video
+              src="https://addjrawhfmcnodhlqnkk.supabase.co/storage/v1/object/public/videos/user_2uOHSpNtGsRIqrxboqiYeZAlQvA/user_2uOHSpNtGsRIqrxboqiYeZAlQvA_1744995536726.mp4"
+              controls
+              width={1280}
+              height={720}
+              className="w-full h-full object-cover rounded-xl border border-zinc-800 shadow-2xl shadow-pink-500/10"
+              >
+                 Your browser does not support the video tag.
+             </video>
             </div>
 
             <div className="absolute -bottom-6 -right-6 w-32 h-32 bg-gradient-to-br from-pink-600 to-purple-600 rounded-full blur-3xl opacity-30"></div>
@@ -386,7 +398,7 @@ export default function LandingPage() {
           >
             <h2 className="text-3xl md:text-5xl font-bold text-white mb-6">Ready to Create Amazing Videos?</h2>
             <p className="text-zinc-400 text-lg mb-8 max-w-2xl mx-auto">
-              Join thousands of creators who are already using PUNK.AI to bring their video ideas to life.
+              Join thousands of creators who are already using Progen.AI to bring their video ideas to life.
             </p>
             <Link href="/dashboard">
               <Button className="bg-gradient-to-r from-pink-600 to-purple-600 hover:from-pink-700 hover:to-purple-700 text-white px-8 py-6 h-auto text-lg">
@@ -409,7 +421,7 @@ export default function LandingPage() {
                 <span className="text-xl font-bold text-white">PROGEN.AI</span>
               </Link>
               <p className="text-zinc-400 mb-4 max-w-xs">
-                Create stunning AI-generated videos with a punk aesthetic. Customize your videos with our powerful
+                Create stunning AI-generated videos with a aesthetic. Customize your videos with our powerful
                 tools.
               </p>
               <div className="flex space-x-4">
