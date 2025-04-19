@@ -20,14 +20,14 @@ export function StepBackgroundVideo({ settings, onSettingsChange }: StepBackgrou
     {
       value: "1",
       label: "",
-      description: "Block-based world with pixel art style",
-      preview: "https://qbhnvyynbrkwonkfxkwn.supabase.co/storage/v1/object/public/fypcontent//SubwaySurfer.mp4",
+      description: "Minecraft gameplay",
+      preview: "https://qbhnvyynbrkwonkfxkwn.supabase.co/storage/v1/object/public/fypcontent//MC%20Parkour%20(3)%20(1)%20(1)%20(1)%20(1).mp4",
     },
     {
       value: "2",
       label: "",
-      description: "Cosmic theme with sparkling particle effects",
-      preview: "https://qbhnvyynbrkwonkfxkwn.supabase.co/storage/v1/object/public/fypcontent//Stardust.mp4",
+      description: "Subway Surfer gameplay",
+      preview: "https://qbhnvyynbrkwonkfxkwn.supabase.co/storage/v1/object/public/fypcontent//SubwaySurfer.mp4",
     },
     {
       value: "3",
@@ -45,7 +45,7 @@ export function StepBackgroundVideo({ settings, onSettingsChange }: StepBackgrou
       value: "0",
       label: "No Video",
       description: "Generate video without background Video",
-      preview: "https://qbhnvyynbrkwonkfxkwn.supabase.co/storage/v1/object/public/fypcontent//backgroundVideo69.mp4",
+      preview: null,
     },
   ];
 

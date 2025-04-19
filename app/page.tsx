@@ -180,7 +180,7 @@ export default function LandingPage() {
 
         {/* Right Side - Auth & Actions */}
         <div className="ml-auto flex gap-4 sm:gap-6">
-         <Link href="/playground">
+         <Link href="/dashboard">
             <Button variant="outline" size="sm" className="border-pink-600 text-pink-500 hover:bg-pink-600/10">
               Dashboard
             </Button>
@@ -269,7 +269,7 @@ export default function LandingPage() {
           >  
             <div className="aspect-video rounded-xl overflow-hidden border border-zinc-800 shadow-2xl shadow-pink-500/10">
             <video
-              src="https://addjrawhfmcnodhlqnkk.supabase.co/storage/v1/object/public/videos/user_2uOHSpNtGsRIqrxboqiYeZAlQvA/user_2uOHSpNtGsRIqrxboqiYeZAlQvA_1744995536726.mp4"
+              src="https://qbhnvyynbrkwonkfxkwn.supabase.co/storage/v1/object/public/fypcontent//WEbsite%20Demo%20(1).mp4"
               controls
               width={1280}
               height={720}

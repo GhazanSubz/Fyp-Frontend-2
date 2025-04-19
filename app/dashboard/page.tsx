@@ -23,7 +23,7 @@ export default function DashboardPage() {
             <div className="mt-10">
               <RecentProjects />
             </div>
-          </div>s
+          </div>
         </DashboardShell>
       </div>
     </div>
