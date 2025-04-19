@@ -102,32 +102,41 @@ export function RecentProjects({ className = "" }: RecentProjectsProps) {
   }
 
   // Function to download a video
-  const handleDownload = async (url: string, prompt: string) => {
+  const handleDownload = async (url: string, prompt: string, id: number) => {
     try {
-      const response = await fetch(url)
-      const blob = await response.blob()
-      
-      // Create a safe filename
+      const response = await fetch(url);
+      const blob = await response.blob();
+  
       const filename = prompt
         .substring(0, 30)
-        .replace(/[^a-z0-9]/gi, '_')
-        .toLowerCase() + '.mp4'
-      
-      // Create a download link
-      const downloadUrl = window.URL.createObjectURL(blob)
-      const link = document.createElement('a')
-      link.href = downloadUrl
-      link.download = filename
-      
-      // Append to the document, click, and clean up
-      document.body.appendChild(link)
-      link.click()
-      document.body.removeChild(link)
+        .replace(/[^a-z0-9]/gi, "_")
+        .toLowerCase() + ".mp4";
+  
+      const downloadUrl = window.URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.href = downloadUrl;
+      link.download = filename;
+  
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+  
+      // ✅ Update Supabase to mark video as downloaded
+      const { error } = await supabase
+        .from("videos")
+        .update({ downloaded: true })
+        .eq("id", id);
+  
+      if (error) {
+        console.error("Failed to update downloaded status:", error);
+      } else {
+        console.log("Video marked as downloaded ✅");
+      }
     } catch (err) {
-      console.error('Error downloading video:', err)
-      alert('Failed to download video')
+      console.error("Error downloading video:", err);
+      alert("Failed to download video");
     }
-  }
+  };
 
   return (
     <motion.div
@@ -203,7 +212,7 @@ export function RecentProjects({ className = "" }: RecentProjectsProps) {
                   </Link>
                   
                   <button
-                    onClick={() => handleDownload(video.url, video.prompt)}
+                    onClick={() => handleDownload(video.url, video.prompt, video.id)}
                     className="p-1.5 rounded-full hover:bg-zinc-700 transition-colors"
                     title="Download video"
                   >

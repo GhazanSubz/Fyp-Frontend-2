@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { LoadingScreen } from "../(main)/_components/loading-screen";
 import { GlitchText } from "../(main)/_components/ui/glitch-text";
 import SidebarWrapper from "../(main)/_components/SidebarWrapper";
-import { Download, ArrowRight, ArrowLeft } from "lucide-react";
+import { Download, ArrowRight, ArrowLeft, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { StepPrompt } from "../(main)/_components/steps/step-prompt";
 import { StepGenre } from "../(main)/_components/steps/step-genre";
@@ -49,6 +49,7 @@ export function VideoGenerator() {
   const [videoUrl, setVideoUrl] = useState<string | null>(null);
   const [videoId, setVideoId] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [showVideo, setShowVideo] = useState(false);
 
   const handlePromptSubmit = (value: string) => {
     setPrompt(value);
@@ -97,6 +98,7 @@ export function VideoGenerator() {
       if (data.success && data.url) {
         setVideoUrl(data.url);
         setVideoId(data.videoId);
+        setShowVideo(true); // Show video container
         console.log("Video generated successfully, ID:", data.videoId);
       } else {
         throw new Error("Video generation failed: No valid URL returned.");
@@ -121,20 +123,43 @@ export function VideoGenerator() {
     if (currentStep > 1) setCurrentStep(currentStep - 1);
   };
 
+  const handleCloseVideo = () => {
+    setShowVideo(false);
+  };
+
   const renderVideoPlayer = () => {
     if (!videoUrl) return null;
 
     return (
-      <div className="mt-8 p-6 bg-zinc-800 rounded-xl border border-zinc-700">
-        <h3 className="text-xl font-bold text-white mb-4">Your Generated Video</h3>
+      <div className="p-6 bg-zinc-800 rounded-xl border border-zinc-700 relative">
+        <div className="flex justify-between items-center mb-4">
+          <h3 className="text-xl font-bold text-white">Your Generated Video</h3>
+          <Button 
+            variant="ghost" 
+            onClick={handleCloseVideo}
+            className="p-1 h-8 w-8 rounded-full hover:bg-zinc-700"
+          >
+            <X className="h-5 w-5 text-zinc-400" />
+          </Button>
+        </div>
+        
         <video 
-          className="w-full rounded-lg" 
+          className="w-full aspect-video rounded-lg" 
           controls 
           autoPlay 
           src={videoUrl} 
-          key={videoId} // Key ensures React reloads the video when a new one is generated
+          key={videoId}
         />
-        <div className="mt-4 flex justify-end">
+        
+        <div className="mt-6 flex justify-between items-center">
+          <Button
+            variant="outline"
+            onClick={handleCloseVideo}
+            className="border-zinc-700 text-zinc-400 hover:bg-zinc-700"
+          >
+            Back to Editor
+          </Button>
+          
           <a
             href={videoUrl}
             download={`generated-video-${videoId}.mp4`}
@@ -170,8 +195,9 @@ export function VideoGenerator() {
             </GlitchText>
             <div className="h-1 w-48 bg-gradient-to-r from-purple-500 via-pink-500 to-red-500 mx-auto mt-2" />
             <p className="text-zinc-400 mt-4 max-w-2xl mx-auto">
-              Enter your video idea below and customize it with our generator. Break the rules and create
-              something revolutionary!
+              {showVideo 
+                ? "Your video has been generated. You can download it or go back to the editor."
+                : "Enter your video idea below and customize it with our generator. Break the rules and create something revolutionary!"}
             </p>
           </motion.div>
 
@@ -188,97 +214,114 @@ export function VideoGenerator() {
             </div>
           )}
 
-          {/* Step Progress Indicator */}
-          <div className="mb-10">
-            <div className="flex justify-between mb-2">
-              {STEPS.map((step) => (
-                <div 
-                  key={step.id} 
-                  className={`h-2 w-full mx-0.5 rounded-full transition-colors duration-300 ${
-                    step.id <= currentStep 
-                      ? "bg-gradient-to-r from-purple-600 to-pink-600" 
-                      : "bg-zinc-800"
-                  }`}
-                />
-              ))}
-            </div>
-            <div className="flex justify-between px-1">
-              {STEPS.map((step) => (
-                <div 
-                  key={step.id}
-                  className={`text-xs font-medium transition-colors duration-300 ${
-                    step.id === currentStep 
-                      ? "text-pink-500" 
-                      : "text-zinc-600"
-                  }`}
-                >
-                  {step.id}
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Current Step Content */}
-          <div className="max-w-3xl mx-auto">
-            <div className="bg-zinc-800 rounded-xl border border-zinc-700 p-6 mb-6">
-              <h2 className="text-xl font-bold text-white mb-6">
-                {currentStep === STEPS.length 
-                  ? "Finalize Customization" 
-                  : `Step ${currentStep}: ${STEPS[currentStep - 1]?.title}`}
-              </h2>
-              
-              <AnimatePresence mode="wait">
+          {/* Main Content Area - Either Shows Step Flow or Video Player */}
+          <div className="max-w-4xl mx-auto">
+            <AnimatePresence mode="wait">
+              {showVideo ? (
                 <motion.div
-                  key={currentStep}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -20 }}
+                  key="video-player"
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.95 }}
                   transition={{ duration: 0.3 }}
                 >
-                  {CurrentStepComponent && (
-                    <CurrentStepComponent
-                      prompt={prompt}
-                      onPromptChange={setPrompt}
-                      onPromptSubmit={handlePromptSubmit}
-                      settings={settings}
-                      onSettingsChange={handleSettingsChange}
-                    />
-                  )}
+                  {renderVideoPlayer()}
                 </motion.div>
-              </AnimatePresence>
-              
-              <div className="mt-8 flex justify-between">
-                <Button
-                  variant="outline"
-                  onClick={handlePrevStep}
-                  disabled={currentStep <= 1}
-                  className="border-zinc-700 text-zinc-400 hover:bg-zinc-800"
+              ) : (
+                <motion.div
+                  key="prompt-flow"
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.95 }}
+                  transition={{ duration: 0.3 }}
                 >
-                  <ArrowLeft className="mr-2 h-4 w-4" /> Back
-                </Button>
-                <Button
-                  onClick={handleNextStep}
-                  className={`${
-                    currentStep === STEPS.length
-                      ? "bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700"
-                      : "bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700"
-                  } text-white font-bold`}
-                >
-                  {currentStep === STEPS.length ? (
-                    <>Generate Video</>
-                  ) : (
-                    <>Next <ArrowRight className="ml-2 h-4 w-4" /></>
-                  )}
-                </Button>
-              </div>
-            </div>
-          </div>
+                  {/* Step Progress Indicator */}
+                  <div className="mb-10">
+                    <div className="flex justify-between mb-2">
+                      {STEPS.map((step) => (
+                        <div 
+                          key={step.id} 
+                          className={`h-2 w-full mx-0.5 rounded-full transition-colors duration-300 ${
+                            step.id <= currentStep 
+                              ? "bg-gradient-to-r from-purple-600 to-pink-600" 
+                              : "bg-zinc-800"
+                          }`}
+                        />
+                      ))}
+                    </div>
+                    <div className="flex justify-between px-1">
+                      {STEPS.map((step) => (
+                        <div 
+                          key={step.id}
+                          className={`text-xs font-medium transition-colors duration-300 ${
+                            step.id === currentStep 
+                              ? "text-pink-500" 
+                              : "text-zinc-600"
+                          }`}
+                        >
+                          {step.id}
+                        </div>
+                      ))}
+                    </div>
+                  </div>
 
-          {videoUrl && (
-            <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
-              {renderVideoPlayer()}
-            </motion.div>
-          )}
+                  {/* Current Step Content */}
+                  <div className="bg-zinc-800 rounded-xl border border-zinc-700 p-6 mb-6">
+                    <h2 className="text-xl font-bold text-white mb-6">
+                      {currentStep === STEPS.length 
+                        ? "Finalize Customization" 
+                        : `Step ${currentStep}: ${STEPS[currentStep - 1]?.title}`}
+                    </h2>
+                    
+                    <AnimatePresence mode="wait">
+                      <motion.div
+                        key={currentStep}
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -20 }}
+                        transition={{ duration: 0.3 }}
+                      >
+                        {CurrentStepComponent && (
+                          <CurrentStepComponent
+                            prompt={prompt}
+                            onPromptChange={setPrompt}
+                            onPromptSubmit={handlePromptSubmit}
+                            settings={settings}
+                            onSettingsChange={handleSettingsChange}
+                          />
+                        )}
+                      </motion.div>
+                    </AnimatePresence>
+                    
+                    <div className="mt-8 flex justify-between">
+                      <Button
+                        variant="outline"
+                        onClick={handlePrevStep}
+                        disabled={currentStep <= 1}
+                        className="border-zinc-700 text-zinc-400 hover:bg-zinc-800"
+                      >
+                        <ArrowLeft className="mr-2 h-4 w-4" /> Back
+                      </Button>
+                      <Button
+                        onClick={handleNextStep}
+                        className={`${
+                          currentStep === STEPS.length
+                            ? "bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700"
+                            : "bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700"
+                        } text-white font-bold`}
+                      >
+                        {currentStep === STEPS.length ? (
+                          <>Generate Video</>
+                        ) : (
+                          <>Next <ArrowRight className="ml-2 h-4 w-4" /></>
+                        )}
+                      </Button>
+                    </div>
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
         </div>
       </div>
     </div>

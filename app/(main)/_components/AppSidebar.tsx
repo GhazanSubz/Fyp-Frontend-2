@@ -3,7 +3,7 @@ import { useState } from "react"
 import Link from "next/link"
 import { usePathname, useRouter } from "next/navigation"
 import { useUser, useClerk, ClerkProvider } from "@clerk/nextjs"
-import { Home, Video, ImageIcon, FileText, Settings, LogOut, Menu, X, LayoutDashboard } from "lucide-react"
+import { Home, Video, ImageIcon, FileText, Settings, LogOut, Menu, X, LayoutDashboard, Download } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 
@@ -32,6 +32,11 @@ export function AppSidebar() {
       icon: Video,
       highlight: true,
     },
+    {
+      name: "Exports",
+      href: "/exports",
+      icon: Download,
+    }
   ]
 
   const toggleMobileMenu = () => {
