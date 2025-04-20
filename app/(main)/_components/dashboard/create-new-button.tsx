@@ -14,12 +14,13 @@ export function CreateNewButton() {
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button
-          className="btn-gradient-pink relative group bg-pink-700"
+          className="btn-gradient-pink relative group bg-pink-700 w-full sm:w-auto"
           onMouseEnter={() => setIsHovered(true)}
           onMouseLeave={() => setIsHovered(false)}
         >
           <PlusCircle className="mr-2 h-4 w-4" />
-          Create New
+          <span className="hidden sm:inline">Create New</span>
+          <span className="sm:hidden">New</span>
           <span
             className={`absolute inset-0 bg-black/10 rounded-md transition-opacity duration-300 ${
               isHovered ? "opacity-20" : "opacity-0"
@@ -27,7 +28,7 @@ export function CreateNewButton() {
           />
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent align="end" className="bg-zinc-950 border-zinc-800">
+      <DropdownMenuContent align="end" className="bg-zinc-950 border-zinc-800 w-full sm:w-auto">
         <DropdownMenuItem
           className="flex items-center cursor-pointer hover:bg-zinc-900 text-white"
           onClick={() => router.push("/playground")}

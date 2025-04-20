@@ -118,7 +118,7 @@ export function RecentProjects({ className = "" }: RecentProjectsProps) {
       transition={{ duration: 0.4 }}
       className={`punk-card ${className}`}
     >
-      <div className="p-6 border-b border-zinc-800">
+      <div className="p-4 sm:p-6 border-b border-zinc-800">
         <h2 className="text-xl font-bold">Recent Projects</h2>
       </div>
 
@@ -150,8 +150,8 @@ export function RecentProjects({ className = "" }: RecentProjectsProps) {
         <div className="divide-y divide-zinc-800">
           {videos.map((video) => (
             <div key={video.id} className="p-4 hover:bg-zinc-800/30 transition-colors">
-              <div className="flex gap-4">
-                <div className="relative w-64 h-36 rounded overflow-hidden bg-zinc-900 flex-shrink-0 border border-blue-500">
+              <div className="flex flex-col sm:flex-row gap-4">
+                <div className="relative w-full sm:w-64 h-36 rounded overflow-hidden bg-zinc-900 flex-shrink-0 border border-blue-500">
                   <video
                     src={video.url}
                     className="w-full h-full object-cover border border-red-500"
@@ -164,43 +164,45 @@ export function RecentProjects({ className = "" }: RecentProjectsProps) {
                   />
                 </div>
 
-                <div className="flex-grow">
-                  <Link href={video.url}>
-                    <h3 className="font-medium truncate hover:text-blue-400 transition-colors">
-                      {video.prompt.substring(0, 50)}{video.prompt.length > 50 ? '...' : ''}
-                    </h3>
-                  </Link>
-                  <div className="flex items-center text-xs text-zinc-400 mt-1">
-                    <span>{video.genre}</span>
-                    <span className="mx-2">•</span>
-                    <span>{formatDate(video.created_at)}</span>
+                <div className="flex-grow flex flex-col justify-between">
+                  <div>
+                    <Link href={video.url}>
+                      <h3 className="font-medium truncate hover:text-blue-400 transition-colors">
+                        {video.prompt.substring(0, 50)}{video.prompt.length > 50 ? '...' : ''}
+                      </h3>
+                    </Link>
+                    <div className="flex items-center text-xs text-zinc-400 mt-1">
+                      <span>{video.genre}</span>
+                      <span className="mx-2">•</span>
+                      <span>{formatDate(video.created_at)}</span>
+                    </div>
                   </div>
-                </div>
 
-                <div className="flex items-center gap-2">
-                  <Link
-                    href={video.url}
-                    className="p-1.5 rounded-full hover:bg-zinc-700 transition-colors"
-                    title="View video"
-                  >
-                    <Play className="w-4 h-4" />
-                  </Link>
+                  <div className="flex items-center gap-2 mt-4 sm:mt-0">
+                    <Link
+                      href={video.url}
+                      className="p-1.5 rounded-full hover:bg-zinc-700 transition-colors"
+                      title="View video"
+                    >
+                      <Play className="w-4 h-4" />
+                    </Link>
 
-                  <button
-                    onClick={() => openDownloadModal(video)}
-                    className="p-1.5 rounded-full hover:bg-zinc-700 transition-colors"
-                    title="Download video"
-                  >
-                    <Download className="w-4 h-4" />
-                  </button>
+                    <button
+                      onClick={() => openDownloadModal(video)}
+                      className="p-1.5 rounded-full hover:bg-zinc-700 transition-colors"
+                      title="Download video"
+                    >
+                      <Download className="w-4 h-4" />
+                    </button>
 
-                  <button
-                    onClick={() => handleDelete(video.id, video.filename)}
-                    className="p-1.5 rounded-full hover:bg-red-900/40 text-red-400 transition-colors"
-                    title="Delete video"
-                  >
-                    <Trash2 className="w-4 h-4" />
-                  </button>
+                    <button
+                      onClick={() => handleDelete(video.id, video.filename)}
+                      className="p-1.5 rounded-full hover:bg-red-900/40 text-red-400 transition-colors"
+                      title="Delete video"
+                    >
+                      <Trash2 className="w-4 h-4" />
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
