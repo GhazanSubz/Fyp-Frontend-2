@@ -121,6 +121,7 @@ export function StepBackgroundVideo({ settings, onSettingsChange }: StepBackgrou
                   src={option.preview}
                   className="w-full h-40 object-cover"
                   loop
+                  autoPlay
                   muted
                   playsInline
                   onEnded={() => setPlayingVideo(null)}

@@ -251,14 +251,6 @@ export default function LandingPage() {
                 </Button>
               </Link>
             </motion.div>
-            <motion.p
-  className="mt-10 text-3xl md:text-4xl font-extrabold text-center bg-gradient-to-r from-cyan-400 via-purple-400 to-pink-500 bg-clip-text text-transparent drop-shadow-[0_2px_15px_rgba(236,72,153,0.5)]"
-  initial={{ opacity: 0, y: 20 }}
-  animate={{ opacity: 1, y: 0 }}
-  transition={{ duration: 0.6, delay: 0.75 }}
->
-  Here is a Glimpse
-</motion.p>
           </motion.div>
 
           <motion.div
@@ -267,17 +259,16 @@ export default function LandingPage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.8 }}
           >  
-            <div className="aspect-video rounded-xl overflow-hidden border border-zinc-800 shadow-2xl shadow-pink-500/10">
-            <video
-              src="https://qbhnvyynbrkwonkfxkwn.supabase.co/storage/v1/object/public/fypcontent//WEbsite%20Demo%20(1).mp4"
-              controls
-              width={1280}
-              height={720}
-              className="w-full h-full object-cover rounded-xl border border-zinc-800 shadow-2xl shadow-pink-500/10"
-              >
-                 Your browser does not support the video tag.
-             </video>
-            </div>
+             <div className="aspect-video rounded-xl overflow-hidden border border-zinc-800 shadow-2xl shadow-pink-500/10 group relative">
+  <video
+    src="https://qbhnvyynbrkwonkfxkwn.supabase.co/storage/v1/object/public/fypcontent//WEbsite%20Demo%20(1).mp4"
+    autoPlay
+    loop
+    playsInline
+    className="w-full h-full object-cover rounded-xl"
+  />
+  <div className="absolute inset-0 transition-all duration-300 group-hover:bg-black/10 pointer-events-none rounded-xl" />
+</div>
 
             <div className="absolute -bottom-6 -right-6 w-32 h-32 bg-gradient-to-br from-pink-600 to-purple-600 rounded-full blur-3xl opacity-30"></div>
             <div className="absolute -top-6 -left-6 w-32 h-32 bg-gradient-to-br from-cyan-600 to-blue-600 rounded-full blur-3xl opacity-20"></div>

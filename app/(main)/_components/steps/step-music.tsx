@@ -32,21 +32,21 @@ export function StepMusic({ settings, onSettingsChange }: StepMusicProps) {
   const musicOptions = [
     {
       value: "1",
-      label: "Rock",
-      description: "Fast-paced, aggressive guitar riffs and drums",
-      sample: "https://dl.suno-models.io/bark/prompts/continuation_audio/en_speaker_4.mp3", //ADD SUPASBASE URL HERE
+      label: "Experiance",
+      description: "Beautiful rendition of Ludovico Einaudi",
+      sample: "https://qbhnvyynbrkwonkfxkwn.supabase.co/storage/v1/object/public/audio/Audio/Experiance.mp3", //ADD SUPASBASE URL HERE
     },
     {
       value: "2",
-      label: "Classic",
-      description: "Retro electronic music with 80s vibes",
-      sample: "https://dl.suno-models.io/bark/prompts/continuation_audio/en_speaker_4.mp3", 
+      label: "Soul",
+      description: "Perfect with an adventrous reel",
+      sample: "https://qbhnvyynbrkwonkfxkwn.supabase.co/storage/v1/object/public/audio/Audio/BM.wav", 
     },
     {
       value: "3",
-      label: "Hip Hop",
-      description: "Harsh, mechanical sounds with distorted beats",
-      sample: "https://dl.suno-models.io/bark/prompts/continuation_audio/en_speaker_4.mp3", 
+      label: "Aadat",
+      description: "Nescafe Basement's Aadat",
+      sample: "https://qbhnvyynbrkwonkfxkwn.supabase.co/storage/v1/object/public/audio/Audio/Aadat.mp3", 
     },
     {
       value: "0",
